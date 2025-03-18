@@ -19,6 +19,12 @@ interface PostDetailResponse {
   createdAt: string;
 }
 
+interface CreatePostRequest {
+  title: string;
+  description: string;
+  content: string;
+}
+
 let dummyPosts: PostDetailResponse[] = [
   {
     id: 1,
@@ -75,4 +81,19 @@ export async function getPost(id: number) {
 export async function deletePost(id: number) {
   // TODO: fetch()를 활용하여 백엔드 API 호출
   dummyPosts = dummyPosts.filter((post) => post.id !== id);
+}
+
+export async function createPost(request: CreatePostRequest) {
+  // TODO: fetch()를 활용하여 백엔드 API 호출
+  const newPost = {
+    id: dummyPosts[dummyPosts.length - 1].id + 1,
+    title: request.title,
+    description: request.description,
+    content: request.content,
+    commentCount: 0,
+    likeCount: 0,
+    createdAt: new Date().toISOString(),
+  };
+  dummyPosts.push(newPost);
+  return newPost.id;
 }
