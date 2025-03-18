@@ -71,3 +71,8 @@ export async function getPost(id: number) {
 
   return post;
 }
+
+export async function deletePost(id: number) {
+  // TODO: fetch()를 활용하여 백엔드 API 호출
+  dummyPosts = dummyPosts.filter((post) => post.id !== id);
+}
