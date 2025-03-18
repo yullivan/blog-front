@@ -1,4 +1,5 @@
 import { DeleteButton } from "@/components/delete-button";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Post({
@@ -22,11 +23,15 @@ export default async function Post({
   return (
     <div>
       <div>📄 글 상세 페이지 (ID: {postId})</div>
-      <form action={deletePost}>
-        <input hidden={true} name="postId" defaultValue={postId}></input>
-        <button>삭제</button>
-      </form>
-      <DeleteButton postId={postId} />
+
+      <div>
+        <Link href={`/posts/${postId}/edit`}>수정</Link>
+        <form action={deletePost}>
+          <input hidden={true} name="postId" defaultValue={postId}></input>
+          <button>삭제</button>
+        </form>
+        <DeleteButton postId={postId} />
+      </div>
     </div>
   );
 }
