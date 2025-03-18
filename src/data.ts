@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 interface PostResponse {
   id: number;
   title: string;
@@ -57,4 +59,15 @@ export async function getPosts(): Promise<PostResponse[]> {
     const { content, ...postResponse } = post;
     return postResponse;
   });
+}
+
+export async function getPost(id: number) {
+  // TODO: fetch()를 활용하여 백엔드 API 호출
+  const post = dummyPosts.find((post) => post.id === id);
+
+  if (!post) {
+    notFound();
+  }
+
+  return post;
 }

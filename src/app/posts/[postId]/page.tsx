@@ -1,4 +1,5 @@
 import { DeleteButton } from "@/components/delete-button";
+import { getPost } from "@/data";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -8,6 +9,7 @@ export default async function Post({
   params: Promise<{ postId: string }>;
 }) {
   const { postId } = await params;
+  const post = await getPost(+postId);
 
   async function deletePost(formData: FormData) {
     "use server";
@@ -23,7 +25,7 @@ export default async function Post({
   return (
     <div>
       <div>📄 글 상세 페이지 (ID: {postId})</div>
-
+      <div>{post.title}</div>
       <div>
         <Link href={`/posts/${postId}/edit`}>수정</Link>
         <form action={deletePost}>
@@ -32,6 +34,11 @@ export default async function Post({
         </form>
         <DeleteButton postId={postId} />
       </div>
+      <div>
+        <div>{post.createdAt}</div>
+        <div>❤️{post.likeCount}</div>
+      </div>
+      <div>{post.content}</div>
     </div>
   );
 }
