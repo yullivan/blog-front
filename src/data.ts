@@ -97,3 +97,15 @@ export async function createPost(request: CreatePostRequest) {
   dummyPosts.push(newPost);
   return newPost.id;
 }
+
+export async function editPost(postId: number, request: CreatePostRequest) {
+  const post = dummyPosts.find((post) => post.id === postId);
+
+  if (!post) {
+    notFound();
+  }
+
+  post.title = request.title;
+  post.content = request.content;
+  post.description = request.description;
+}
