@@ -7,54 +7,54 @@ interface PostResponse {
   createdAt: string;
 }
 
-export async function getPosts() {
+interface PostDetailResponse {
+  id: number;
+  title: string;
+  description: string;
+  content: string;
+  commentCount: number;
+  likeCount: number;
+  createdAt: string;
+}
+
+let dummyPosts: PostDetailResponse[] = [
+  {
+    id: 1,
+    title: "제주도 여행 후기: 봄날의 올레길을 걷다",
+    description:
+      "제주 올레길 17코스를 따라 걸으며 만난 아름다운 풍경과 맛집 이야기",
+    content:
+      "지난 주말, 제주도의 봄기운을 느끼기 위해 올레길 17코스를 찾았습니다. 성산일출봉이 보이는 해안길을 따라 걸으며 만난 다양한 풍경들이 인상적이었습니다. 특히 중간에 들른 해녀의 집에서 먹은 성게미역국은 잊을 수 없는 맛이었죠. 그날의 일정과 추천 코스를 상세히 정리해보았습니다...",
+    commentCount: 15,
+    likeCount: 42,
+    createdAt: "2025-03-17T08:30:00Z",
+  },
+  {
+    id: 2,
+    title: "ChatGPT로 시작하는 개발 생산성 향상기",
+    description: "AI 도구를 활용한 코딩 효율성 극대화 방법 공유",
+    content:
+      "최근 ChatGPT를 개발 보조 도구로 활용하면서 느낀 점들을 공유합니다. 특히 반복적인 보일러플레이트 코드 작성이나 간단한 알고리즘 구현에서 많은 도움을 받았는데요. 실제 프로젝트에서 적용한 사례와 함께 주의해야 할 점들도 정리해보았습니다...",
+    commentCount: 28,
+    likeCount: 156,
+    createdAt: "2025-03-15T14:20:00Z",
+  },
+  {
+    id: 3,
+    title: "우리 동네 숨은 맛집: 을지로 골목식당 탐방기",
+    description: "을지로 3가 인쇄소 골목 사이에서 발견한 진짜 맛집들",
+    content:
+      "평일 점심시간, 을지로 인쇄소 골목을 걷다가 발견한 숨은 맛집들을 소개합니다. 30년 된 국수집부터 젊은 셰프가 운영하는 모던한 한식당까지, 골목 구석구석에서 발견한 진정한 맛의 정수를 담아보았습니다. 특히 추천하고 싶은 곳은 골목 안쪽의 작은 김치찌개 전문점인데요...",
+    commentCount: 33,
+    likeCount: 89,
+    createdAt: "2025-03-16T11:45:00Z",
+  },
+];
+
+export async function getPosts(): Promise<PostResponse[]> {
   // TODO: fetch()를 활용하여 백엔드 API 호출
-  const dummyPosts: PostResponse[] = [
-    {
-      id: 1,
-      title: "2024 개발자 로드맵 공유",
-      description:
-        "프론트엔드 개발자가 되기 위한 학습 경로를 정리해보았습니다. React, TypeScript, 그리고 최신 웹 개발 트렌드까지 다룹니다.",
-      commentCount: 23,
-      likeCount: 156,
-      createdAt: "2025-03-17T15:30:00Z",
-    },
-    {
-      id: 2,
-      title: "리액트 성능 최적화 팁",
-      description:
-        "리액트 애플리케이션의 성능을 향상시키기 위한 실용적인 팁들을 공유합니다. useMemo, useCallback의 올바른 사용법과 렌더링 최적화 방법을 알아봅시다.",
-      commentCount: 45,
-      likeCount: 234,
-      createdAt: "2025-03-16T09:20:00Z",
-    },
-    {
-      id: 3,
-      title: "TypeScript 타입 시스템 완벽 가이드",
-      description:
-        "타입스크립트의 고급 기능들을 자세히 살펴봅니다. 제네릭, 유틸리티 타입, 그리고 타입 추론에 대해 심도있게 다룹니다.",
-      commentCount: 67,
-      likeCount: 342,
-      createdAt: "2025-03-15T18:45:00Z",
-    },
-    {
-      id: 4,
-      title: "Next.js 13 새로운 기능 소개",
-      description:
-        "Next.js 13의 주요 변경사항과 새로운 기능들을 상세히 설명합니다. App Router, Server Components, 그리고 개선된 개발자 경험에 대해 알아보세요.",
-      commentCount: 89,
-      likeCount: 421,
-      createdAt: "2025-03-14T11:15:00Z",
-    },
-    {
-      id: 5,
-      title: "웹 접근성 향상을 위한 실천 방법",
-      description:
-        "모두가 사용할 수 있는 웹사이트를 만들기 위한 접근성 가이드라인과 실제 구현 방법을 공유합니다. ARIA 속성의 올바른 사용법도 포함되어 있습니다.",
-      commentCount: 34,
-      likeCount: 178,
-      createdAt: "2025-03-13T14:25:00Z",
-    },
-  ];
-  return dummyPosts;
+  return dummyPosts.map((post) => {
+    const { content, ...postResponse } = post;
+    return postResponse;
+  });
 }
