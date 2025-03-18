@@ -1,3 +1,4 @@
+import { DeleteButton } from "@/components/delete-button";
 import { redirect } from "next/navigation";
 
 export default async function Post({
@@ -25,6 +26,7 @@ export default async function Post({
         <input hidden={true} name="postId" defaultValue={postId}></input>
         <button>삭제</button>
       </form>
+      <DeleteButton postId={postId} />
     </div>
   );
 }
