@@ -1,3 +1,5 @@
+import BackwardButton from "@/components/backward-button";
+
 export default function NewPost() {
   async function createPost(formData: FormData) {
     "use server";
@@ -22,7 +24,10 @@ export default function NewPost() {
       <form action={createPost}>
         <input type="text" placeholder="제목을 작성하세요" name="title" />
         <textarea placeholder="내용을 작성하세요" name="content"></textarea>
-        <button type="submit">작성하기</button>
+        <div>
+          <button type="submit">작성하기</button>
+          <BackwardButton />
+        </div>
       </form>
     </div>
   );
